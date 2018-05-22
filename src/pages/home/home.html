@@ -76,4 +76,11 @@
       </button>
     </ion-card-content>
   </ion-card>
+  <no-items (create)="addItem()" *ngIf="!items?.length"></no-items>
+  <ion-fab right bottom>
+    <button ion-fab (click)="addItem()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
 </ion-content>

@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import { App,NavController} from "ionic-angular";
+import { App } from "ionic-angular";
 
 // Providers
 import { ParseProvider } from '../../providers/parse/parse';

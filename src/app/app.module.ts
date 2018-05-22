@@ -13,18 +13,18 @@ import {MyApp} from "./app.component";
 import {HomePage} from "../pages/home/home";
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
-import {FaIconComponent} from "../components/fa-icon/fa-icon.component";
+import { CustomComponentsModule } from '../components/custom-components.module';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     SigninPage,
-    SignupPage,
-    FaIconComponent
+    SignupPage
   ],
   imports: [
     BrowserModule,
+    CustomComponentsModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
