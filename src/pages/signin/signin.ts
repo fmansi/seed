@@ -6,7 +6,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 
 // Pages
 import { SignupPage } from '../signup/signup';
-import { HomePage } from '../home/home';
+import { HomePage } from '../home/home.page';
 
 @Component({
   selector: 'page-signin',

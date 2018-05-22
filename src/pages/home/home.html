@@ -1,86 +1,74 @@
+
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic & Font Awesome
-    </ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>Home</ion-title>
+	</ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-card>
-    <ion-card-header>Basic Icons</ion-card-header>
-    <ion-card-content>
-      <fa-icon [name]="icon"></fa-icon>
-      fa-{{icon}}
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>Colored Icons</ion-card-header>
-    <ion-card-content>
-      <fa-icon [name]="icon" [color]="color" size="3x"></fa-icon>
-      {{color}}
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>Larger Icons</ion-card-header>
-    <ion-card-content>
-      <fa-icon [name]="icon" [size]="size"></fa-icon>
-      fa-{{size}}
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>Fixed Width Icons</ion-card-header>
-    <ion-card-content>
-      <fa-icon name="home" fixed-width></fa-icon>
-      Home
-    </ion-card-content>
-    <ion-card-content>
-      <fa-icon name="book" fixed-width></fa-icon>
-      Library
-    </ion-card-content>
-    <ion-card-content>
-      <fa-icon name="pencil" fixed-width></fa-icon>
-      Applications
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>Additional class</ion-card-header>
-    <ion-card-content>
-      <fa-icon name="circle-o-notch" class="fa-spin" size="2x"></fa-icon>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>Without using a component</ion-card-header>
-    <ion-card-content>
-      <ul class="fa-ul">
-        <li><i class="fa-li fa fa-check-square"></i>List icons</li>
-        <li><i class="fa-li fa fa-check-square"></i>can be used</li>
-        <li><i class="fa-li fa fa-spinner fa-spin"></i>as bullets</li>
-        <li><i class="fa-li fa fa-square"></i>in lists</li>
-      </ul>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>Buttons with icons</ion-card-header>
-    <ion-card-content>
-      <button ion-button icon-left>
-        <fa-icon name="group"></fa-icon>
-        people
-      </button>
-      <button ion-button icon-right>
-        star
-        <fa-icon name="star"></fa-icon>
-      </button>
-      <button ion-button icon-only>
-        <fa-icon name="pied-piper"></fa-icon>
-      </button>
-    </ion-card-content>
-  </ion-card>
-  <no-items (create)="addItem()" *ngIf="!items?.length"></no-items>
-  <ion-fab right bottom>
-    <button ion-fab (click)="addItem()">
-      <ion-icon name="add"></ion-icon>
-    </button>
-  </ion-fab>
+<ion-content class="getting-started">
+	<div class="home-hello">
+		<img src="assets/img/01_bg.jpg"/>
+
+		<div class="hello-title" text-wrap>
+			<h1>Ad'oro S.A.</h1>
+			 Estrada de Acesso SP 053/332 Km 04 – Bairro do Mursa Varzea Paulista/SP
+		</div>
+	</div>
+
+	<ion-row *ngFor="let tilePair of tiles">
+		<ion-col *ngFor="let tile of tilePair">
+			<ion-card class="tile" (click)="navigateTo(tile)">
+				<ion-card-content>
+					<ion-item>
+						<h1>
+							<ion-icon [name]="tile.icon"></ion-icon>
+						</h1>
+						<h2>{{tile.title}}</h2>
+					</ion-item>
+				</ion-card-content>
+			</ion-card>
+		</ion-col>
+	</ion-row>
+
+	<ion-row>
+		<ion-card class="quick-action" (click)="callUs()">
+			<ion-card-content>
+				<ion-icon name="phone-portrait"></ion-icon>
+				<span>ligue para TI Adoro</span>
+			</ion-card-content>
+		</ion-card>
+	</ion-row>
+
+	<ion-row>
+		<ion-card class="quick-action" (click)="sendEmail()">
+			<ion-card-content>
+				<ion-icon name="mail"></ion-icon>
+				<span>Suporte Mobile</span>
+			</ion-card-content>
+		</ion-card>
+	</ion-row>
+
+	<ion-row>
+
+		<ion-card class="quick-action" (click)="getDirections()">
+			<ion-card-content>
+				<ion-icon name="compass"></ion-icon>
+				<span>Nossa localização</span>
+			</ion-card-content>
+		</ion-card>
+	</ion-row>
+
+<!--<ion-row>
+
+		<ion-card class="quick-action" (click)="openFacebookPage()">
+			<ion-card-content>
+				<ion-icon name="logo-facebook"></ion-icon>
+				<span>Visite-nos no Facebook</span>
+			</ion-card-content>
+		</ion-card>
+	</ion-row> -->
 
 </ion-content>

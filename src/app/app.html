@@ -1,1 +1,101 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-split-pane>
+
+  <ion-menu id="leftMenu" type="overlay" [content]="content">
+
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content [menuClose]="wide">
+      <ion-list>
+        <ion-item (click)="openPage(homePage)">
+          <ion-icon [name]="homePage.icon" item-left></ion-icon>
+          {{homePage.title}}
+        </ion-item>
+        <ion-item-divider>
+          Qualidade
+        </ion-item-divider>
+        <ion-item *ngFor="let p of qualityPages" (click)="openPage(p)">
+          <ion-icon [name]="p.icon" item-left></ion-icon>
+          {{p.title}}
+          <ion-badge *ngIf="p.new" item-end>new</ion-badge>
+        </ion-item>
+        <!-- <ion-item-divider>
+					Generic
+				</ion-item-divider>
+				<ion-item *ngFor="let p of genericPages" (click)="openPage(p)">
+					<ion-icon [name]="p.icon" item-left></ion-icon>
+					{{p.title}}
+					<ion-badge *ngIf="p.new" item-end>new</ion-badge>
+				</ion-item>
+				<ion-item-divider>
+					Database
+				</ion-item-divider>
+				<ion-item *ngFor="let p of databasePages" (click)="openPage(p)">
+					<ion-icon [name]="p.icon" item-left></ion-icon>
+					{{p.title}}
+					<ion-badge *ngIf="p.new" item-end>new</ion-badge>
+				</ion-item>
+				<ion-item-divider>
+					API Integration
+				</ion-item-divider>
+				<ion-item *ngFor="let p of integrationPages" (click)="openPage(p)">
+					<ion-icon [name]="p.icon" item-left></ion-icon>
+					{{p.title}}
+					<ion-badge *ngIf="p.new" item-end>new</ion-badge>
+				</ion-item>
+				<ion-item-divider>
+					3rd Party / Special
+				</ion-item-divider>
+				<ion-item *ngFor="let p of thirdpartyPages" (click)="openPage(p)">
+					<ion-icon [name]="p.icon" item-left></ion-icon>
+					{{p.title}}
+					<ion-badge *ngIf="p.new" item-end>new</ion-badge>
+				</ion-item> 
+				<ion-item-divider>
+					3rd Party / Charts
+				</ion-item-divider>
+				<ion-item *ngFor="let p of thirdpartyChartsPages" (click)="openPage(p)">
+					<ion-icon [name]="p.icon" item-left></ion-icon>
+					{{p.title}}
+					<ion-badge *ngIf="p.new" item-end>new</ion-badge>
+				</ion-item>
+				<ion-item-divider>
+					CSS Components
+				</ion-item-divider>
+				<ion-item *ngFor="let p of cssComponentsPages" (click)="openPage(p)">
+					<ion-icon [name]="p.icon" item-left></ion-icon>
+					{{p.title}}
+					<ion-badge *ngIf="p.new" item-end>new</ion-badge>
+				</ion-item> -->
+      </ion-list>
+    </ion-content>
+    <ion-footer>
+
+      <ion-grid>
+        <ion-row no-padding no-margin>
+          <ion-col col-4 no-padding>
+            <button ion-button clear color="dark" icon-only>
+              <ion-icon name="settings"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-4 no-padding>
+
+          </ion-col>
+          <ion-col col-4 no-padding>
+            <button ion-button clear color="dark" icon-only (click)="signout()">
+              <ion-icon name="log-out"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-footer>
+
+  </ion-menu>
+
+
+  <ion-nav id="nav" [root]="rootPage" main #content swipe-back-enabled="false"></ion-nav>
+</ion-split-pane>
+

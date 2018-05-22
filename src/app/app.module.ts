@@ -10,7 +10,7 @@ import { AuthProvider } from '../providers/auth/auth';
 
 // Pages
 import {MyApp} from "./app.component";
-import {HomePage} from "../pages/home/home";
+import { HomeModule } from '../pages/home/home.module';
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { CustomComponentsModule } from '../components/custom-components.module';
@@ -18,12 +18,12 @@ import { CustomComponentsModule } from '../components/custom-components.module';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     SigninPage,
     SignupPage
   ],
   imports: [
     BrowserModule,
+    HomeModule,
     CustomComponentsModule,
     IonicModule.forRoot(MyApp)
   ],
@@ -31,8 +31,7 @@ import { CustomComponentsModule } from '../components/custom-components.module';
   entryComponents: [
     MyApp,
     SigninPage,
-    SignupPage,
-    HomePage
+    SignupPage
   ],
   providers: [
     StatusBar,

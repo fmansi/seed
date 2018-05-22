@@ -5,7 +5,7 @@ import { NavController, LoadingController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 
 // Pages
-import { HomePage } from '../home/home';
+import { HomePage } from '../home/home.page';
 
 @Component({
   selector: 'page-signup',
