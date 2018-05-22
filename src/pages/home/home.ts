@@ -37,7 +37,7 @@ export class HomePage {
     return HomePage.SIZES[this.sizeIdx];
   }
 
-  constructor(private parseProvider: ParseProvider, private auth: AuthProvider, private navCtrl: NavController, private app: App) {
+  constructor(private parseProvider: ParseProvider, private auth: AuthProvider,  private app: App) {
     this.listScores();
     
     setInterval(() => {
