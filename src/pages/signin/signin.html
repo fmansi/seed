@@ -2,24 +2,24 @@
 
   <p class="logo">
     <!-- <img src="http://placehold.it/300x200"/> -->
-    <img src="../../assets/img/placeholder.png" />
+    <img src="assets/img/logo.png" />
   </p>
 
   <form (submit)="doSignin()">
     <ion-list inset padding>
 
       <ion-item>
-        <ion-label stacked>Username</ion-label>
+        <ion-label stacked>Usuário</ion-label>
         <ion-input type="text" [(ngModel)]="username" name="username"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>Password</ion-label>
+        <ion-label stacked>Senha</ion-label>
         <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
       </ion-item>
       
       <div padding>
-        <button ion-button color="accent" block>Login</button>
-        <p style="text-align: center">Don't you have an acccount? <a [navPush]="registerPage">Signup</a></p>
+        <button ion-button color="accent" block [disabled]="username.length == '0' || password.length == '0'">Login</button>
+        <p style="text-align: center">Você ainda não possue uma conta? <a [navPush]="registerPage">Registrar-se</a></p>
       </div>
 
     </ion-list>
