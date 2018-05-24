@@ -1,0 +1,121 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>Adicionar</ion-title>
+
+		<ion-buttons end>
+			<button ion-button (click)="close()">Fechar</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+<div padding class="listTests" >
+	<div *ngFor="let test of tests">
+		<ion-chip  *ngIf="test.iw != null && test.fw != null" [color] ="((test.fw - test.iw)*100)/test.iw < '0'|| ((test.fw - test.iw)*100)/test.iw >= '8.0'? 'danger': 'favorite'">
+			<ion-label color="dark">{{ ((test.fw - test.iw)*100)/test.iw | number : '1.1-1' }} %</ion-label>
+		</ion-chip>
+	</div>
+</div>
+<ion-slides #absorptionSlider pager paginationType="progress">
+
+	<ion-slide>
+		<ion-list>
+			<ion-item-divider  color="light">Peso inicial
+			</ion-item-divider>
+				<ion-item *ngFor="let test of tests | slice:0:5; let i=index">
+					<ion-label fixed>{{test.id}} - {{test.name}}</ion-label>
+					<ion-input type="number" pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" [(ngModel)]="test.iw" required></ion-input>
+				</ion-item>	
+		</ion-list>
+	</ion-slide>
+	<ion-slide>
+		<ion-list>
+			<ion-item-divider  color="light">Peso inicial
+			</ion-item-divider>
+			<ion-item *ngFor="let test of tests | slice:5:10; let i=index">
+				<ion-label fixed>{{test.id}} - {{test.name}}</ion-label>
+				<ion-input type="number" pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" [(ngModel)]="test.iw" required></ion-input>
+			</ion-item>
+		</ion-list>
+	
+	</ion-slide>
+
+		<ion-slide>
+		
+			<ion-list>
+				<ion-list-header item-start>Temperaturas
+				</ion-list-header>
+		
+					<ion-item-divider item-left color="light">Pré-Chiller
+						<ion-badge item-end [color]="tempPreChiller > '0' ? 'danger' : ''">{{tempPreChiller}}°C</ion-badge>
+					</ion-item-divider>
+					
+					<ion-item>
+						<ion-range min="-10" max="20" step="0.25" pin="true" [(ngModel)]="tempPreChiller" required>
+							<ion-icon range-left name="thermometer" color="primary"></ion-icon>
+							<ion-icon range-right name="thermometer" color="danger"></ion-icon>
+						</ion-range>
+					</ion-item>
+					<ion-item-divider item-left color="light">Chiller
+						<ion-badge item-end [color]="tempChiller > '0' ? 'danger' : ''">{{tempChiller}}°C</ion-badge>
+					</ion-item-divider>
+					
+					<ion-item>
+						<ion-range min="-10" max="20" step="0.25" pin="true" [(ngModel)]="tempChiller" required>
+							<ion-icon range-left name="thermometer" color="primary"></ion-icon>
+							<ion-icon range-right name="thermometer" color="danger"></ion-icon>
+						</ion-range>
+					</ion-item>
+					<ion-list-header item-start>Tempos
+					</ion-list-header>
+
+					<ion-item *ngIf="!runTimer && !showtimeChiller">
+						 Iniciar Cronometro
+						<button ion-button outline item-end icon-left (click)="startTimer()">
+							<ion-icon name="timer"></ion-icon>
+							{{displayTime}}
+						</button>
+					</ion-item>
+					<ion-item *ngIf="runTimer || showtimeChiller">
+						Tempo Pré-Chiller
+						<button ion-button outline item-end icon-left [color]="!showtimeChiller ? 'danger' : ''"  [disabled]="disabled" (click)="getTimer(displayTime,1)" required>
+							<ion-icon name="timer"></ion-icon>
+							{{!timePreChiller ? displayTime : timePreChiller}}
+						</button>
+					</ion-item>
+					
+					<ion-item *ngIf="showtimeChiller">
+						 Tempo Chiller
+						<button ion-button outline item-end icon-left [color]="displayTime ? 'danger' : ''"  (click)="getTimer(displayTime,2)" required>
+							<ion-icon name="timer"></ion-icon>
+							 {{!timeChiller ? displayTime : timeChiller}}
+						</button>
+					</ion-item>
+			</ion-list>
+			
+		</ion-slide>
+		<ion-slide>
+			<ion-list>
+				<ion-item-divider color="light">Peso final
+				</ion-item-divider>
+				<ion-item *ngFor="let test of tests | slice:0:5; let i=index">
+					<ion-label fixed>{{test.id}} - {{test.name}}</ion-label>
+					<ion-input type="number" pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" [(ngModel)]="test.fw" required></ion-input>
+				</ion-item>
+			</ion-list>
+		</ion-slide>
+		<ion-slide>
+			<ion-list>
+				<ion-item-divider color="light">Peso final
+				</ion-item-divider>
+				<ion-item *ngFor="let test of tests | slice:5:10; let i=index">
+					<ion-label fixed>{{test.id}} - {{test.name}}</ion-label>
+					<ion-input type="number" pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" [(ngModel)]="test.fw" required></ion-input>
+				</ion-item>
+			</ion-list>
+			<button ion-button full (click)="save()">Salvar</button>
+		
+		</ion-slide>
+
+
+</ion-slides>
+</ion-content>

@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{tabTitle}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-tabs>
+  <ion-tab [root]="tab1Root" [rootParams]="model" tabTitle="Pesos" tabIcon="speedometer" [enabled]="activedWeight"></ion-tab>
+  <ion-tab [root]="tab2Root" [rootParams]="model" tabTitle="Temperaturas" tabIcon="thermometer" [enabled]="activedTemp" ></ion-tab>
+  <ion-tab [root]="tab3Root" [rootParams]="model" tabTitle="Tempos" tabIcon="timer" [enabled]="activedTimer" ></ion-tab>
+</ion-tabs>
+

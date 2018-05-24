@@ -1,3 +1,5 @@
+
+import { Http, HttpModule } from '@angular/http';
 import {BrowserModule} from "@angular/platform-browser";
 import {ErrorHandler, NgModule} from "@angular/core";
 import {IonicApp, IonicErrorHandler, IonicModule} from "ionic-angular";
@@ -15,7 +17,8 @@ import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { CustomComponentsModule } from '../components/custom-components.module';
 import { SettingsPageModule } from '../pages/settings/settings.module';
-
+import { AbsorptionsPageModule } from '../pages/absorptions/absorptions.module';
+    
 @NgModule({
   declarations: [
     MyApp,
@@ -24,9 +27,11 @@ import { SettingsPageModule } from '../pages/settings/settings.module';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     HomeModule,
     CustomComponentsModule,
     SettingsPageModule,
+    AbsorptionsPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

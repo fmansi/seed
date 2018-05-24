@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Temperaturas
+    </ion-title>
+		<!-- <ion-buttons end>
+			<button ion-button (click)="closeModal()">
+				<ion-icon name="close"></ion-icon>
+			</button>
+		</ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+		
+		
+					<ion-item-divider item-left color="light">Pré-Chiller
+						<ion-badge item-end [color]="tempPreChiller > '0' ? 'danger' : ''">{{ tempPreChiller }}&deg;C</ion-badge>
+					</ion-item-divider>
+					
+					<ion-item>
+						<ion-range min="-10" max="100" step="1" pin="false" [(ngModel)]="100*tempPreChiller" (ngModelChange)="tempPreChiller=$event/10"  required>
+							<ion-icon range-left name="thermometer" color="primary"></ion-icon>
+							<ion-icon range-right name="thermometer" color="danger"></ion-icon>
+						</ion-range>
+					</ion-item>
+					<ion-item-divider item-left color="light">Chiller
+						<ion-badge item-end [color]="tempChiller > '0' ? 'danger' : ''">{{tempChiller}}&deg;C</ion-badge>
+					</ion-item-divider>
+					
+					<ion-item>
+						<ion-range min="-1000" max="2000" step="1" pin="true" [(ngModel)]="tempChiller" required>
+							<ion-icon range-left name="thermometer" color="primary"></ion-icon>
+							<ion-icon range-right name="thermometer" color="danger"></ion-icon>
+						</ion-range>
+					</ion-item>
+
+					<ion-item-divider item-left color="light">
+						Controle de Borbulho
+					<ion-badge item-end [color]="bubble >= '2' ? 'danger' : ''">{{bubble==0 ? 'Fraco': bubble==1 ? 'Moderado': 'Excessivo' }}</ion-badge>
+					</ion-item-divider>
+					<ion-item>
+						<ion-range min="0" max="3"  [(ngModel)]="bubble" required>
+							<ion-icon range-left name="ios-analytics" color="primary"></ion-icon>
+							<ion-icon range-right name="ios-analytics" color="danger"></ion-icon>
+						</ion-range>
+					</ion-item>
+
+							 <button ion-button block (click)="finishTemps()">Próximo </button>
+			</ion-list>
+</ion-content>

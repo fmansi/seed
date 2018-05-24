@@ -9,6 +9,17 @@
 <ion-content>
   <ion-list>
     <ion-list-header>
+      Servidor API (Backend as a Service)
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Endereço</ion-label>
+      <ion-input type="text" placeholder="URL Servidor" [(ngModel)]="parseServerUrl" name="urlServe" disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Base</ion-label>
+      <ion-input type="text" placeholder="Base" [(ngModel)]="parseServerDB" name="bdServe" disabled></ion-input>
+    </ion-item>
+    <ion-list-header>
       Absorção (Chiller)
     </ion-list-header>
     <ion-item>
@@ -32,5 +43,51 @@
         <ion-option value="mute_year" >Selenciar por um ano</ion-option> -->
       </ion-select>
     </ion-item>
+   <!--  <button ion-item>
+      <ion-icon class="fa-battery-2" item-start color="secondary"></ion-icon>
+      <ion-label>Cellular</ion-label>
+    </button>
+    <ion-item>
+      <ion-label>Quantidade de Amostras</ion-label>
+      <ion-input type="number" placeholder="Quantidade" [(ngModel)]="data.amount" name="amount" required=""></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-list radio-group>
+    <ion-list-header>
+      Silence Phone
+    </ion-list-header>
+    <ion-item>
+      <ion-label color="dark">Always</ion-label>
+      <ion-radio value="always" checked></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label color="dark">Only while phone is locked</ion-label>
+      <ion-radio value="locked"></ion-radio>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      Apps Installed
+    </ion-list-header>
+    <ion-item>
+      <ion-icon name="ionic" item-start color="primary"></ion-icon>
+      <ion-label>Ionic View</ion-label>
+      <button ion-button outline item-end>Uninstall</button>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="brush" item-start color="primary"></ion-icon>
+      <ion-label>Ionic Creator</ion-label>
+      <button ion-button outline item-end>Uninstall</button>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="logo-octocat" item-start color="dark"></ion-icon>
+      <ion-label>Hubstruck</ion-label>
+      <button ion-button outline item-end>Uninstall</button>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="paw" item-start color="danger"></ion-icon>
+      <ion-label>Barkpark</ion-label>
+      <button ion-button outline item-end>Uninstall</button>
+    </ion-item> -->
   </ion-list>
 </ion-content>

@@ -1,24 +1,34 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { Config } from '../../config';
 
 @IonicPage()
 @Component({
   selector: 'page-settings',
   templateUrl: 'settings.html',
 })
-export class SettingsPage {
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
 
+export class SettingsPage {
+  private parseServerUrl: string;
+  private parseServerDB: string;
+  private key = 'settings-key';
+
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.parseServerUrl = Config.parseApi.parseServerUrl;
+    this.parseServerDB = Config.parseApi.absorptionDB;
+  }
+ 
   //Set Defaults 
-  qtytest: number = 10;
-  notifications: string = "mute";
-  icon: string = "notifications-off";
-  isToggled = true;
+  qtytest = JSON.parse(localStorage.getItem("settings-qtytest")) || 10;
+  notifications = JSON.parse(localStorage.getItem("settings-notifications")) || "mute";
+  icon: string =  "notifications-off";
+  isToggled = localStorage.getItem("settings-SIF") || false;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
+    console.log(localStorage.getItem("settings-qtytest"));
+    console.log(localStorage.getItem("settings-SIF"));
+    console.log(localStorage.getItem("settings-notifications"));
   }
   
   qtytests(): number[] {
@@ -27,9 +37,11 @@ export class SettingsPage {
   
   qtyChosen(): void {
     console.log(this.qtytest);
+    this.saveLocalData('settings-qtytest', this.qtytest);
   }
   public notify() {
     console.log("Toggled: " + this.isToggled);
+    this.saveLocalData('settings-SIF', this.isToggled);
   }
  
   public notificationSelect(selected) {
@@ -39,7 +51,11 @@ export class SettingsPage {
     }else{
       this.icon = "notifications-off";
     }
+    this.saveLocalData('settings-notifications', selected);
   }
- 
+  
+  public saveLocalData(key, data){
+    localStorage.setItem(key, JSON.stringify(data));
+  }
  
 }

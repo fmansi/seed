@@ -8,6 +8,7 @@ import { SigninPage } from '../pages/signin/signin';
 import { HomePage } from '../pages/home/home.page';
 import { AuthProvider } from '../providers/auth/auth';
 import { SettingsPage } from '../pages/settings/settings';
+import { AbsorptionsListPage } from '../pages/absorptions/list/absorptions.list.page';
 
 @Component({
   templateUrl: 'app.html'
@@ -42,7 +43,7 @@ export class MyApp {
     this.homePage = { title: 'Home', component: HomePage, icon: 'home' };
 
     this.qualityPages = [
-      //{ title: 'Absorção (Chiller)', component: AbsorptionsListPage, icon: 'thermometer' },
+      { title: 'Absorção (Chiller)', component: AbsorptionsListPage, icon: 'thermometer' },
       //{ title: 'Absorção', component: TabsPage, icon: 'time' },
     ];
   }
@@ -68,13 +69,13 @@ export class MyApp {
 
   settings(){
     this.menu.close();
-    this.app.getRootNav().setRoot(SettingsPage);
+    this.nav.setRoot(SettingsPage);
   }
 
   signout() {
     this.auth.signout().subscribe(() => {
       this.menu.close();
-      this.app.getRootNav().setRoot(SigninPage);
+      this.nav.setRoot(SigninPage);
     });
   }
 }

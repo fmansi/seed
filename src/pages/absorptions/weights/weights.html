@@ -1,0 +1,48 @@
+<ion-header>
+	<ion-navbar>
+		 <!-- <button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button> -->
+		<ion-title>Pesos</ion-title>
+
+	<!-- 	<ion-buttons end>
+			<button ion-button (click)="closeModal()">
+				<ion-icon name="close"></ion-icon>
+			</button>
+		</ion-buttons> -->
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-list id="local-storage-list" *ngIf="tests?.length">
+		<ion-item-sliding *ngFor="let test of tests;  let i = index">
+			<ion-item text-wrap>
+        <ion-spinner *ngIf="test.iw && !test.fw" name="ios-small" item-left></ion-spinner>
+				<ion-badge  *ngIf="test.iw != null && test.fw != null" [color] ="((test.fw - test.iw)*100)/test.iw < '0'|| ((test.fw - test.iw)*100)/test.iw >= '8.0'? 'danger': 'favorite'" item-left>
+					{{ ((test.fw - test.iw)*100)/test.iw | number : '1.1-1' }} %
+				</ion-badge>
+				<h2>{{test.name}}</h2>
+        <button ion-button outline item-end icon-left (click)="addinitialWeight(test, i)" [disabled]="actived">
+							<ion-icon name="speedometer"></ion-icon>
+              {{test.iw ? test.iw +'Kg' : 'inicial'}}
+						</button>
+            <button ion-button outline item-end icon-left color="danger" (click)="addfinalWeight(test, i)" [disabled]="!actived">
+							<ion-icon name="speedometer"></ion-icon>
+              {{test.fw ? test.fw +'Kg' : 'final'}}
+						</button>
+			</ion-item>
+			<ion-item-options>
+				<button ion-button danger (click)="editItem(item)">
+					<ion-icon name="create"></ion-icon>
+				</button>
+				<button ion-button danger (click)="deleteItem(item.id)">
+					<ion-icon name="trash"></ion-icon>
+				</button>
+			</ion-item-options>
+		</ion-item-sliding>
+		 <button ion-button block (click)="nextStep()" *ngIf="!actived">Próximo </button>
+		 <button ion-button block (click)="finishWeights()" *ngIf="actived">Finalizar </button>
+	</ion-list>
+ 
+
+</ion-content>

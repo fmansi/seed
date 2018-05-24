@@ -1,0 +1,49 @@
+<ion-header>
+	<ion-navbar>
+		 <button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>Absorção (Chiller)</ion-title>
+
+		<ion-buttons end>
+			<button ion-button (click)="addAbsorption()">
+				<ion-icon name="add"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-list id="absorptions-list" *ngIf="absorptions?.length">
+		<ion-list-header>
+		Coletas
+		<!-- <button item-end ion-button icon-only clear (click)="addAbsorption()">
+					<ion-icon color="primary" name="add-circle"></ion-icon>
+				</button> -->
+		</ion-list-header>
+
+		<ion-item-sliding *ngFor="let absorption of absorptions">
+			<ion-item text-wrap>
+				<button ion-item (click)="itemSelected(absorption)">
+					<ion-icon name="md-calendar"></ion-icon> {{absorption.date | date:"dd/MM/yyyy" }}
+					<span item-end> {{absorption.shift }} </span>
+					<p>{{absorption.createdAt | date:"HH:MM:ss"}} - {{absorption.analyst}}</p>
+				</button>
+			</ion-item>
+			<ion-item-options>
+				<button ion-button primary (click)="editAbsorption(absorption)">
+					<ion-icon name="create"></ion-icon>
+				</button>
+					<button ion-button color="danger" (click)="deleteAbsorption(absorption)">
+					<ion-icon name="trash"></ion-icon>
+				</button>
+			</ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
+	<no-items (create)="addAbsorption()" *ngIf="!absorptions?.length"></no-items>
+	<ion-fab right bottom>
+		<button ion-fab mini (click)="addAbsorption()">
+  			<ion-icon name="add"></ion-icon>
+		</button>
+	</ion-fab>
+</ion-content>

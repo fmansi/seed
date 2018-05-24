@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Tempos
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+	<ion-item *ngIf="!runTimer && !showtimeChiller">
+			Iniciar Cronometro
+		<button ion-button outline item-end icon-left (click)="startTimer()">
+			<ion-icon name="timer"></ion-icon>
+			{{displayTime}}
+		</button>
+	</ion-item>	
+	<ion-item *ngIf="runTimer || showtimeChiller">
+		Tempo Pré-Chiller
+<button ion-button outline item-end icon-left [color]="!showtimeChiller ? 'danger' : ''" [disabled]="timePreChillerDisabled"
+  (click)="getTimer(displayTime,1)" required>
+
+			<ion-icon name="timer"></ion-icon>
+			{{!timePreChiller ? displayTime : timePreChiller}}
+		</button>
+	</ion-item>
+	<ion-item *ngIf="showtimeChiller">
+			Tempo Chiller
+		<button ion-button outline item-end icon-left [color]="!timeChiller ? 'danger' : ''" [disabled]="timeChillerDisabled" (click)="getTimer(displayTime,2)" required>
+			<ion-icon name="timer"></ion-icon>
+				{{!timeChiller ? displayTime : timeChiller}}
+		</button>
+	</ion-item>
+
+	<ion-item *ngIf="isSIF && timeChiller">
+		Controle de Gotejamento
+		<button ion-button outline item-end icon-left [color]="displayTime ? 'danger' : ''" (click)="getTimer(displayTime,3)"
+  required>
+
+			<ion-icon name="timer"></ion-icon>
+				{{ displayTime}}
+		</button>
+	</ion-item>
+
+	<ion-row>
+		<ion-col width-50 offset-25>
+			<h2 class="clock">{{displayTime}}</h2>
+		</ion-col>
+	</ion-row>
+<button ion-button block type="submit" (click)="handler()">{{text}}</button>
+</ion-content>
