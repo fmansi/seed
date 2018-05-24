@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Configurações</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      Absorção (Chiller)
+    </ion-list-header>
+    <ion-item>
+      <ion-icon name="eye" item-start color="dark"></ion-icon>
+      <ion-label>Inspeção SIF</ion-label>
+      <ion-toggle [(ngModel)]="isToggled" (ionChange)="notify()"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Quantidade de Amostras</ion-label>
+      <ion-select [(ngModel)]="qtytest" (ionChange)="qtyChosen()">
+        <ion-option *ngFor="let qtytest of qtytests()">{{qtytest}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="{{icon}}" item-start color="dark"></ion-icon>
+      <ion-label>Notificações</ion-label>
+        <ion-select [(ngModel)]="notifications" (ionChange)="notificationSelect($event)" interface="action-sheet">
+        <ion-option value="enable">Habilitar</ion-option>
+        <ion-option value="mute">Silenciar</ion-option>
+       <!--  <ion-option value="mute_week">Silenciar por uma semana</ion-option>
+        <ion-option value="mute_year" >Selenciar por um ano</ion-option> -->
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</ion-content>

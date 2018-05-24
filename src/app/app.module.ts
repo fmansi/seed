@@ -14,6 +14,7 @@ import { HomeModule } from '../pages/home/home.module';
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { CustomComponentsModule } from '../components/custom-components.module';
+import { SettingsPageModule } from '../pages/settings/settings.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CustomComponentsModule } from '../components/custom-components.module';
     BrowserModule,
     HomeModule,
     CustomComponentsModule,
+    SettingsPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

@@ -7,6 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SigninPage } from '../pages/signin/signin';
 import { HomePage } from '../pages/home/home.page';
 import { AuthProvider } from '../providers/auth/auth';
+import { SettingsPage } from '../pages/settings/settings';
 
 @Component({
   templateUrl: 'app.html'
@@ -63,6 +64,11 @@ export class MyApp {
     } */
 
     this.nav.setRoot(component);
+  }
+
+  settings(){
+    this.menu.close();
+    this.app.getRootNav().setRoot(SettingsPage);
   }
 
   signout() {
