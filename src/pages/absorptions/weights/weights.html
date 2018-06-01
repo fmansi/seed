@@ -18,7 +18,8 @@
 		<ion-item-sliding *ngFor="let test of tests;  let i = index">
 			<ion-item text-wrap>
         <ion-spinner *ngIf="test.iw && !test.fw" name="ios-small" item-left></ion-spinner>
-				<ion-badge  *ngIf="test.iw != null && test.fw != null" [color] ="((test.fw - test.iw)*100)/test.iw < '0'|| ((test.fw - test.iw)*100)/test.iw >= '8.0'? 'danger': 'favorite'" item-left>
+				<ion-badge *ngIf="test.iw != null && test.fw != null" [color]="((test.fw - test.iw)*100)/test.iw < '0'|| ((test.fw - test.iw)*100)/test.iw > target ? 'danger': 'success'" item-left>
+
 					{{ ((test.fw - test.iw)*100)/test.iw | number : '1.1-1' }} %
 				</ion-badge>
 				<h2>{{test.name}}</h2>
@@ -40,8 +41,10 @@
 				</button>
 			</ion-item-options>
 		</ion-item-sliding>
+		<ion-row padding>
 		 <button ion-button block (click)="nextStep()" *ngIf="!actived">Próximo </button>
 		 <button ion-button block (click)="finishWeights()" *ngIf="actived">Finalizar </button>
+		</ion-row>
 	</ion-list>
  
 

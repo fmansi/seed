@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Events } from 'ionic-angular';
+import { NavController, Events, DateTime } from 'ionic-angular';
 import { AbsorptionsConst } from '../../../app/app.constant';
 import * as moment from 'moment';
 
@@ -10,9 +10,11 @@ import * as moment from 'moment';
 export class TimersPage {
   actived : boolean;
   permanence: any = {};
+  drips: any = {};
   now = moment();
   nowTime;
   isSIF = JSON.parse(localStorage.getItem("settings-SIF")) || false;
+  startTime = new Date();
 
 
 
@@ -28,12 +30,10 @@ export class TimersPage {
 	* time Control functions
 	*/
 
-	timeLabel = " iniciar cronômetro";
 	timePreChiller = null;
 	timeChiller = null;
 	timeDrip = null;
-	showtimeChiller = false;
-
+	
 	timeInSeconds: number;
 	time: number;
 	remainingTime: number;
@@ -41,10 +41,8 @@ export class TimersPage {
 	hasStarted: boolean;
 	hasFinished: boolean;
 	displayTime: string;
-	timePreChillerDisabled = false;
-	timeChillerDisabled = false;
-	timeDripDisabled = false;
 
+	disabled: boolean = false;
 	timersArray: any[];
 
 	ngOnInit() {
@@ -57,18 +55,75 @@ export class TimersPage {
 	}
 
 	handler = this.setNext;
-	text = 'first text';
+	text = 'iniciar cronômetro';
+	icon = 'play';
 
 	setNext() {
-		alert('handler1 called');
 		this.handler = this.goToNext;
-		this.text = 'other text';
+		this.text = 'registrar tempo';
+		this.icon = 'pause';
+		this.startTimer();
+		this.permanence.datetime = this.startTime;
 	}
 
+
 	goToNext() {
-		alert('second called');
-		// go to Next Page
+		this.text = 'reiniciar cronômetro';
+		this.icon = 'refresh';
+		this.handler = this.goToRestart;
+		this.pauseTimer();
+		this.timersArray.push({ stoppedAt: this.displayTime });
+		if(this.timersArray.length == 2 ){
+			this.timePreChiller = this.timersArray[1].stoppedAt;
+			this.permanence.timePreChiller = this.timePreChiller;
+		}
+		if (this.timersArray.length == 3) {
+			this.timeChiller = this.timersArray[2].stoppedAt;
+			this.permanence.timeChiller = this.timeChiller;
+			let durations = [];
+			durations.push(this.timePreChiller);
+			durations.push(this.timeChiller);
+			const totalDurations = durations.slice(1)
+				.reduce((prev, cur) => moment.duration(cur).add(prev),
+					moment.duration(durations[0]))
+			//console.log(`Total time is: ${moment.utc(totalDurations.asMilliseconds()).format("HH:mm:ss")}`)		
+			this.permanence.timeTotal = moment.utc(totalDurations.asMilliseconds()).format("HH:mm:ss");
+			console.log(this.permanence.timeTotal);
+			if(!this.isSIF){
+				this.handler = this.goToFinish;
+				this.text = 'Finalizar tempos';
+				this.icon = 'square';
+			}
+		}
+		if (this.timersArray.length == 4 && this.isSIF) {
+			this.timeDrip = this.timersArray[3].stoppedAt;
+			this.drips.datetime = this.startTime;
+			this.drips.time = this.timeDrip;
+			this.events.publish('absorptions:drips', this.drips);
+			this.handler = this.goToFinish;
+			this.text = 'Finalizar tempos';
+			this.icon = 'square';
+		}
+		
 	}
+
+	goToRestart(){
+	
+		this.text = 'iniciar cronômetro';
+		this.icon = 'play';
+		this.handler = this.setNext;
+		this.initTimer();
+	
+	}
+
+	goToFinish() {
+		this.text = 'Finalizado';
+		this.disabled = true;
+		this.icon = 'square';
+		this.navCtrl.parent.select(0);
+		this.events.publish('absorptions:permanence', this.permanence);		
+	}
+
 
 	initTimer() {
 		
@@ -79,13 +134,11 @@ export class TimersPage {
 		this.hasStarted = false;
 		this.hasFinished = false;
 		this.remainingTime = this.timeInSeconds;
-
 		this.displayTime = this.getSecondsAsDigitalClock(this.remainingTime);
 	}
 
 	createNew() {
 		this.timersArray.push({ stoppedAt: this.displayTime });
-
 		this.initTimer();
 		this.pauseTimer();
 	}
@@ -94,39 +147,6 @@ export class TimersPage {
 		this.runTimer = true;
 		this.hasStarted = true;
 		this.timerTick();
-		this.timeLabel = "Tempo Pré-Chiller";	
-	}
-
-	getTimer(display ,num){
-		
-		if(num === 1){
-			this.timePreChiller = display;
-			console.log("Pré-Chiller", this.timePreChiller);
-			var startTime = new Date();
-			this.permanence.datetime = startTime;
-			this.permanence.timePreChiller = this.timePreChiller;
-			this.showtimeChiller = true;
-			this.timePreChillerDisabled = true;
-		} else if(num === 2 ){
-			this.pauseTimer();
-			this.permanence.timeTotal = new Date();	
-			this.timeChiller = display;
-			console.log("Chiller", this.timeChiller);
-			this.permanence.timeChiller = this.timeChiller;
-			this.timeChillerDisabled = true;	
-			if(!this.isSIF){
-				this.navCtrl.parent.select(0);
-				this.events.publish('absorptions:permanence', this.permanence); 
-			}else{
-				this.initTimer();
-			}			
-		} else if (num === 3) {
-			this.startTimer();
-			console.log("Gotejamento", this.timeDrip);
-			this.permanence.timeDrip = this.timeDrip;
-			this.timeDripDisabled = true;	
-		}
-	
 	}
 
 	pauseTimer() {

@@ -27,6 +27,7 @@ export class WeightsPage {
   end1;
   start2;
   end2;
+  target;
 
   constructor(public navCtrl: NavController,
               public alertCtrl: AlertController, 
@@ -40,6 +41,7 @@ export class WeightsPage {
         
     let qtyTest = JSON.parse(localStorage.getItem("settings-qtytest")) || 10;
     let testName = AbsorptionsConst.testName;   
+    this.target = AbsorptionsConst.target; 
     
     moment.locale('pt-BR');
 
@@ -55,6 +57,11 @@ export class WeightsPage {
       let timers: any = [];
       timers.push(permanence);
       this.newAbsorption.permanence = timers;
+    })
+    this.events.subscribe('absorptions:drips', (drips) => {
+      let timers: any = [];
+      timers.push(drips);
+      this.newAbsorption.drips = timers;
     })
     this.events.subscribe('absorptions:temperatures', (temperatures) => {
       let temp: any = [];

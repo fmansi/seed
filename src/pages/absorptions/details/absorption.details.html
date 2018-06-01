@@ -1,11 +1,6 @@
 <ion-header>
-  <ion-navbar color="primary">
+  <ion-navbar>
     <ion-title>Controle da Absorção</ion-title>
-    <!-- <ion-buttons end>
-      <button ion-button icon-only (click)="settings()">
-        <ion-icon name="settings"></ion-icon>
-      </button>
-    </ion-buttons> -->
   </ion-navbar>
 </ion-header>
 
@@ -30,7 +25,7 @@
                 </ion-col>
                 <ion-col>
                   <div>
-                      <ion-badge [color]="item.average >= target ? 'danger' : 'success'" end>{{ item.average }}%</ion-badge>
+                      <ion-badge [color]="item.average > target ? 'danger' : 'success'" end>{{ item.average }}%</ion-badge>
                   </div>
                 </ion-col>
               </ion-row>
@@ -62,14 +57,15 @@
               <h2> Amostra {{ child.id }}</h2>
               <p><ion-icon class="ion-ios-speedometer"></ion-icon> {{ child.iw }} Kg </p>
               <p><ion-icon class="ion-ios-speedometer"></ion-icon> {{ child.fw }} Kg</p>
-              <ion-badge [color]="child.ab >= target ? 'danger' : 'success'" item-end>{{ child.ab }}%</ion-badge>
+              <ion-badge [color]="child.ab > target ? 'danger' : 'success'" item-end>{{ child.ab }}%</ion-badge>
             </ion-item>
           </ion-list-header>
         </ion-list>
       </ion-list-header>
       <div *ngIf="permanence?.length">
         <ion-item color="light" >
-          <b>Tempo de Permanência Pré Chiller</b>
+          <ion-icon item-start color= "gray" name="stopwatch"></ion-icon>
+          Tempo de Permanência Pré Chiller
         </ion-item>
         <ion-item>
           <ion-grid>
@@ -86,13 +82,13 @@
             </ion-row>
             <ion-row *ngFor="let reste of permanence">
               <ion-col>
-                <ion-icon name="ios-clock-outline"></ion-icon> {{reste.timePreChiller}}
+                 {{reste.timePreChiller}}
               </ion-col>
               <ion-col>
-                  <ion-icon name="ios-clock-outline"></ion-icon> {{reste.timeChiller}}
+                  {{reste.timeChiller}}
               </ion-col>
               <ion-col>
-                  <ion-icon name="ios-clock-outline"></ion-icon> {{reste.timeTotal | date: "HH:MM:ss"}}
+                 {{reste.timeTotal}}
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -100,18 +96,23 @@
       </div>
       <div *ngIf="bubbles?.length">
         <ion-item color="light">
-          <b>Controle de Borbulho</b>
+          <ion-icon item-start color="gray"  name="stopwatch"></ion-icon>
+            Controle de Borbulho
         </ion-item>
         <ion-item *ngFor="let bubble of bubbles" >
-            <ion-icon name="ios-clock-outline"></ion-icon> {{bubble.datetime |date: "HH:MM:ss"}}<span item-end>{{ bubble.status=='E' ?'Excessivo' : (bubble.status=='M'?'Moderado': 'Fraco')}}</span>
+             {{bubble.datetime |date: "HH:MM:ss"}}<span item-end>{{ bubble.status=='E' ?'Excessivo' : (bubble.status=='M'?'Moderado': 'Fraco')}}</span>
         </ion-item>
       </div> 
       <div *ngIf="drips?.length">
         <ion-item color="light">
-          <b>Controle de Gotejamento</b>
+          <ion-icon item-start color="gray" name="stopwatch"></ion-icon>
+          Controle de Gotejamento
         </ion-item>
         <ion-item *ngFor="let drip of drips">
-            <ion-icon name="ios-clock-outline"></ion-icon> {{drip.datetime}}<span item-end>   <ion-icon name="ios-clock-outline"></ion-icon> {{drip.time}}</span>
+           {{drip.datetime |date: "HH:MM:ss"}}
+          <span item-end>
+             {{drip.time}}
+          </span>
         </ion-item>
       </div>
     </ion-list>

@@ -7,38 +7,27 @@
 </ion-header>
 
 <ion-content padding>
-
-	<ion-item *ngIf="!runTimer && !showtimeChiller">
-			Iniciar Cronometro
-		<button ion-button outline item-end icon-left (click)="startTimer()">
-			<ion-icon name="timer"></ion-icon>
-			{{displayTime}}
-		</button>
-	</ion-item>	
-	<ion-item *ngIf="runTimer || showtimeChiller">
+	<ion-item>
 		Tempo Pré-Chiller
-<button ion-button outline item-end icon-left [color]="!showtimeChiller ? 'danger' : ''" [disabled]="timePreChillerDisabled"
-  (click)="getTimer(displayTime,1)" required>
+		<button ion-button outline item-end icon-left [color]="!timePreChiller ? 'gray' : ''">
 
 			<ion-icon name="timer"></ion-icon>
-			{{!timePreChiller ? displayTime : timePreChiller}}
+			{{!timePreChiller ? "00:00:00" : timePreChiller}}
 		</button>
 	</ion-item>
-	<ion-item *ngIf="showtimeChiller">
+	<ion-item >
 			Tempo Chiller
-		<button ion-button outline item-end icon-left [color]="!timeChiller ? 'danger' : ''" [disabled]="timeChillerDisabled" (click)="getTimer(displayTime,2)" required>
+		<button ion-button outline item-end icon-left [color]="!timeChiller ? 'gray' : ''">
 			<ion-icon name="timer"></ion-icon>
-				{{!timeChiller ? displayTime : timeChiller}}
+ 			{{!timeChiller ? "00:00:00" : timeChiller}}
 		</button>
 	</ion-item>
 
-	<ion-item *ngIf="isSIF && timeChiller">
+	<ion-item *ngIf="isSIF">
 		Controle de Gotejamento
-		<button ion-button outline item-end icon-left [color]="displayTime ? 'danger' : ''" (click)="getTimer(displayTime,3)"
-  required>
-
+		<button ion-button outline item-end icon-left [color]="!timeDrip ? 'gray' : ''">
 			<ion-icon name="timer"></ion-icon>
-				{{ displayTime}}
+				{{ !timeDrip ? "00:00:00":displayTime}}
 		</button>
 	</ion-item>
 
@@ -47,5 +36,8 @@
 			<h2 class="clock">{{displayTime}}</h2>
 		</ion-col>
 	</ion-row>
-<button ion-button block type="submit" (click)="handler()">{{text}}</button>
+		<button ion-button block icon-start type="submit" (click)="handler()" [disabled] ="disabled">
+			<ion-icon name="{{icon}}"></ion-icon>
+			{{text}}
+		</button>
 </ion-content>

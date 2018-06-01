@@ -5,6 +5,8 @@ import { AbsorptionsService } from '../absorptions.service';
 import { AbsorptionsItem } from '../models/absorptions.model';
 import { AbsorptionsEditPage } from '../edit/absorptions.edit.page';
 import { AbsorptionDetailsPage } from '../details/absorption.details';
+// Providers
+import { AuthProvider } from '../../../providers/auth/auth';
 
 import { TabsPage } from '../tabs/tabs'; 
 
@@ -22,6 +24,7 @@ export class AbsorptionsListPage implements OnInit {
 	constructor(service: AbsorptionsService, 
 				modalController: ModalController,
 				public navCtrl: NavController,
+				private auth: AuthProvider,
 				public alertCtrl: AlertController) {
 		this.service = service;
 		this.modalController = modalController;
@@ -29,6 +32,10 @@ export class AbsorptionsListPage implements OnInit {
 
 	ngOnInit(): void {
 		this.loadItems();
+	}
+
+	ionViewCanEnter(): boolean {
+		return this.auth.authenticated();
 	}
 	
 	
@@ -59,9 +66,9 @@ export class AbsorptionsListPage implements OnInit {
 			if (!item) {
 				return;
 			}
-			console.log(item);
-			
+			//console.log(item);	
 			this.service.addAbsorption(item);
+			this.absorptions.push(item);
 		});
 		modal.present();
 	}

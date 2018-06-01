@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, ToastController } from 'ionic-angular';
 
 // Providers
 import { AuthProvider } from '../../providers/auth/auth';
@@ -17,7 +17,10 @@ export class SignupPage {
   verify: string = '';
   email: string = '';
 
-  constructor(public navCtrl: NavController, private authPvdr: AuthProvider, private loadCtrl: LoadingController) { }
+  constructor(public navCtrl: NavController,
+              private authPvdr: AuthProvider, 
+              private loadCtrl: LoadingController,
+              private toast: ToastController) { }
 
   ionViewDidLoad() {
     console.log('Initiate Signup');
@@ -34,6 +37,7 @@ export class SignupPage {
       this.navCtrl.setRoot(HomePage);
       loader.dismissAll();
     }, (error) => {
+      this.toast.create({ message: error, duration: 5000 }).present();
       loader.dismissAll();
     });
   }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Config } from '../../config';
+import { AuthProvider } from '../../providers/auth/auth';
+
 
 @IonicPage()
 @Component({
@@ -13,7 +15,9 @@ export class SettingsPage {
   private parseServerDB: string;
   private key = 'settings-key';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              private auth: AuthProvider) {
     this.parseServerUrl = Config.parseApi.parseServerUrl;
     this.parseServerDB = Config.parseApi.absorptionDB;
   }
@@ -25,10 +29,13 @@ export class SettingsPage {
   isToggled = localStorage.getItem("settings-SIF") || false;
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SettingsPage');
+    /* console.log('ionViewDidLoad SettingsPage');
     console.log(localStorage.getItem("settings-qtytest"));
     console.log(localStorage.getItem("settings-SIF"));
-    console.log(localStorage.getItem("settings-notifications"));
+    console.log(localStorage.getItem("settings-notifications")); */
+  }
+  ionViewCanEnter(): boolean {
+    return this.auth.authenticated();
   }
   
   qtytests(): number[] {
