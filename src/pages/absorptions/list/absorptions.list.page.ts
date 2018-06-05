@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController, AlertController } from 'ionic-angular';
+import { AngularBillboardService } from 'angular-billboard';
 
 import { AbsorptionsService } from '../absorptions.service';
 import { AbsorptionsItem } from '../models/absorptions.model';
@@ -21,13 +22,23 @@ export class AbsorptionsListPage implements OnInit {
 	absorptions = [];
 	groups: any = [];
 
+	type = 'bar';
+	chart: any;
+	chartsOptions: any[];
+	showchart:boolean = false; 
+	first: any = [];
+	secondy: any = [];
+
 	constructor(service: AbsorptionsService, 
 				modalController: ModalController,
 				public navCtrl: NavController,
 				private auth: AuthProvider,
-				public alertCtrl: AlertController) {
+				public alertCtrl: AlertController,
+				private angularBillboardService: AngularBillboardService) {
 		this.service = service;
 		this.modalController = modalController;
+
+		
 	}
 
 	ngOnInit(): void {
@@ -42,9 +53,18 @@ export class AbsorptionsListPage implements OnInit {
 	
 	private loadItems(){
 		let offset = this.absorptions.length;
-		let limit = 20;
+		let limit = 20;		
 		return this.service.getItems( offset, limit).then(results => {
 			if (results === '') return [];
+			for (let index = 0; index < results.length; index++) {
+				const element = results[index];
+				if (element.attributes.shift === "Turno I") {
+					this.first.push(parseFloat(element.attributes.controls[0].average));
+				}
+				if (element.attributes.shift === "Turno II") {
+					this.secondy.push(parseFloat(element.attributes.controls[0].average));
+				}
+			}
 			results.forEach(item => {
 				this.absorptions.push(item.attributes);
 			});
@@ -94,5 +114,47 @@ export class AbsorptionsListPage implements OnInit {
 		});
 		confirm.present();
 	}
+	getChartData(){
+		
+		let data: any ={};
+		let columns: any =[[],[]];
 
+		// Show data last result 
+		columns[0] = this.first.reverse();
+		columns[1] = this.secondy.reverse();
+		// Insert first labels
+		columns[0].unshift('Turno I');
+		columns[1].unshift('Turno II');
+		
+		data.type = this.type;
+		data.columns= columns;
+
+		console.log(data);
+		return data;
+		
+	}
+
+	showChart(){
+		this.chartsOptions = [
+			{
+				data: this.getChartData(),
+				grid: {
+					y: {
+						lines: [
+							{
+								value: 8,
+								text: "Limite de Absorção"
+							}
+						]
+					}
+				},
+				title: {
+					text: 'Absorção por Turno'
+				}
+			}
+		];
+		this.chart = this.angularBillboardService.generate(...this.chartsOptions)[0];
+		return this.showchart = !this.showchart;
+	}
+	
 }

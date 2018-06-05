@@ -16,6 +16,10 @@ module.exports = {
            '{{ROOT}}/node_modules/font-awesome/fonts/**/*'],
     dest: '{{WWW}}/assets/fonts'
   },
+  copyBillboard: {
+    src: ['{{ROOT}}/node_modules/billboard.js/dist/billboard.min.css'],
+    dest: '{{WWW}}/assets'
+  },
   copyPolyfills: {
     src: [`{{ROOT}}/node_modules/ionic-angular/polyfills/${process.env.IONIC_POLYFILL_FILE_NAME}`],
     dest: '{{BUILD}}'

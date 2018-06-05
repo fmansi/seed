@@ -101,6 +101,7 @@ export class AuthProvider {
     return this.currentUser() !== null;
   }
 
+  
   private parseInitialize() {
     Parse.initialize(this.parseAppId);
     Parse.serverURL = this.parseServerUrl;

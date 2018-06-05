@@ -139,6 +139,7 @@ export class AbsorptionsService {
 				query.limit(limit);
 				query.find().then((Results) => {
 					resolve(Results);
+					//console.log(Results[0].attributes.controls);
 				}, (error) => {
 					reject(error);
 				});

@@ -1,6 +1,7 @@
 import { IonicModule, IonicPageModule } from 'ionic-angular';
 import { NgModule } from '@angular/core';
 import { PipesModule } from '../../pipes/pipes.module';
+import { AngularBillboardModule } from 'angular-billboard';
 
 import { TabsPage } from './tabs/tabs';
 import { TemperaturesPage } from './temperatures/temperatures';
@@ -19,6 +20,7 @@ import { AbsorptionsService } from './absorptions.service';
 	imports: [
         IonicModule,
         CustomComponentsModule,
+        AngularBillboardModule,
         PipesModule
     ],
 	declarations: [

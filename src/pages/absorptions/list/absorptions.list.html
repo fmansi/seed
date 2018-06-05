@@ -16,12 +16,14 @@
 <ion-content>
 	<ion-list id="absorptions-list" *ngIf="absorptions?.length">
 		<ion-list-header>
-		Coletas
-		<!-- <button item-end ion-button icon-only clear (click)="addAbsorption()">
-					<ion-icon color="primary" name="add-circle"></ion-icon>
-				</button> -->
+			Coletas
+			<button item-end ion-button icon-only clear (click)="showChart()">
+					<ion-icon color="primary" name="podium"></ion-icon>
+			</button>
 		</ion-list-header>
-
+			<div padding>
+				<angular-billboard [chart]="chart" *ngIf="showchart"></angular-billboard>
+			</div>
 		<ion-item-sliding *ngFor="let absorption of absorptions">
 			<ion-item text-wrap>
 				<button ion-item (click)="itemSelected(absorption)">
