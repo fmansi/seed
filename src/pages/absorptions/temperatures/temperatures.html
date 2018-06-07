@@ -38,10 +38,10 @@
 
 					<ion-item-divider item-left color="light">
 						Controle de Borbulho
-					<ion-badge item-end [color]="bubble >= '2' ? 'danger' : ''">{{bubble==0 ? 'Fraco': bubble==1 ? 'Moderado': 'Excessivo' }}</ion-badge>
+					<ion-badge item-end [color]="bubble == '2' ? 'danger' : ''">{{bubble==0 ? 'Fraco': bubble <= 1 ? 'Moderado': 'Excessivo' }}</ion-badge>
 					</ion-item-divider>
 					<ion-item>
-						<ion-range min="0" max="3"  [(ngModel)]="bubble" required>
+							<ion-range min="0" max="2" step="1" snaps="true" [(ngModel)]="bubble" required>
 							<ion-icon range-left name="ios-analytics" color="primary"></ion-icon>
 							<ion-icon range-right name="ios-analytics" color="danger"></ion-icon>
 						</ion-range>

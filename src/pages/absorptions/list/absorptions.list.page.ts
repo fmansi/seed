@@ -23,11 +23,14 @@ export class AbsorptionsListPage implements OnInit {
 	groups: any = [];
 
 	type = 'bar';
+	labels:boolean = false;
+	zoom:boolean = true;
 	chart: any;
 	chartsOptions: any[];
 	showchart:boolean = false; 
 	first: any = [];
 	secondy: any = [];
+	time: any = [];
 
 	constructor(service: AbsorptionsService, 
 				modalController: ModalController,
@@ -36,9 +39,7 @@ export class AbsorptionsListPage implements OnInit {
 				public alertCtrl: AlertController,
 				private angularBillboardService: AngularBillboardService) {
 		this.service = service;
-		this.modalController = modalController;
-
-		
+		this.modalController = modalController;	
 	}
 
 	ngOnInit(): void {
@@ -49,8 +50,6 @@ export class AbsorptionsListPage implements OnInit {
 		return this.auth.authenticated();
 	}
 	
-	
-	
 	private loadItems(){
 		let offset = this.absorptions.length;
 		let limit = 20;		
@@ -58,6 +57,7 @@ export class AbsorptionsListPage implements OnInit {
 			if (results === '') return [];
 			for (let index = 0; index < results.length; index++) {
 				const element = results[index];
+				this.time.push(element.attributes.controls[0].datetime);
 				if (element.attributes.shift === "Turno I") {
 					this.first.push(parseFloat(element.attributes.controls[0].average));
 				}
@@ -86,9 +86,10 @@ export class AbsorptionsListPage implements OnInit {
 			if (!item) {
 				return;
 			}
-			//console.log(item);	
+			console.log(item);	
 			this.service.addAbsorption(item);
-			this.absorptions.push(item);
+			item.createdAt = new Date(); 
+			this.absorptions.unshift(item);
 		});
 		modal.present();
 	}
@@ -117,18 +118,21 @@ export class AbsorptionsListPage implements OnInit {
 	getChartData(){
 		
 		let data: any ={};
-		let columns: any =[[],[]];
+		let columns: any =[[],[],[]];
 
 		// Show data last result 
-		columns[0] = this.first.reverse();
-		columns[1] = this.secondy.reverse();
+		//columns[0] = this.time.reverse();
+		columns[1] = this.first.reverse();
+		columns[2] = this.secondy.reverse();
 		// Insert first labels
-		columns[0].unshift('Turno I');
-		columns[1].unshift('Turno II');
+		//columns[0].unshift('x');
+		columns[1].unshift('Turno I');
+		columns[2].unshift('Turno II');
 		
 		data.type = this.type;
+		data.labels = this.labels;
 		data.columns= columns;
-
+		//data.x = "x";
 		console.log(data);
 		return data;
 		
@@ -138,6 +142,14 @@ export class AbsorptionsListPage implements OnInit {
 		this.chartsOptions = [
 			{
 				data: this.getChartData(),
+				/* axis: {
+					x: {
+						type: "timeseries",
+						tick: {
+							format: "%d-%m-%Y"
+						}
+					}
+				}, */
 				grid: {
 					y: {
 						lines: [
@@ -149,9 +161,13 @@ export class AbsorptionsListPage implements OnInit {
 					}
 				},
 				title: {
-					text: 'Absorção por Turno'
-				}
+					text: 'Absorção Média por Turno'
+				},
+				zoom: {
+					enabled: this.zoom
+				},
 			}
+			
 		];
 		this.chart = this.angularBillboardService.generate(...this.chartsOptions)[0];
 		return this.showchart = !this.showchart;

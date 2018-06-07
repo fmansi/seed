@@ -24,6 +24,11 @@ export class SigninPage {
 
   ionViewDidLoad() {
     console.log('Initiated Signin');
+    // Automatic Login
+    let user = this.authPvdr.authenticated();
+    if (user){
+      this.navCtrl.setRoot(HomePage);
+    }
   }
 
   public doSignin() {
