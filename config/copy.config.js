@@ -21,11 +21,11 @@ module.exports = {
     dest: '{{WWW}}/assets'
   },
   copyPolyfills: {
-    src: [`{{ROOT}}/node_modules/ionic-angular/polyfills/${process.env.IONIC_POLYFILL_FILE_NAME}`],
+    src: ['{{ROOT}}/node_modules/ionic-angular/polyfills/${process.env.IONIC_POLYFILL_FILE_NAME}'],
     dest: '{{BUILD}}'
   },
   copySwToolbox: {
     src: ['{{ROOT}}/node_modules/sw-toolbox/sw-toolbox.js'],
     dest: '{{BUILD}}'
   }
-}
+};

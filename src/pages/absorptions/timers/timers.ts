@@ -68,11 +68,11 @@ export class TimersPage {
 
 
 	goToNext() {
-		this.text = 'reiniciar cronômetro';
+/* 		this.text = 'reiniciar cronômetro';
 		this.icon = 'refresh';
-		this.handler = this.goToRestart;
-		this.pauseTimer();
+		this.handler = this.goToRestart; */
 		this.timersArray.push({ stoppedAt: this.displayTime });
+		this.goToRestart();
 		if(this.timersArray.length == 2 ){
 			this.timePreChiller = this.timersArray[1].stoppedAt;
 			this.permanence.timePreChiller = this.timePreChiller;
