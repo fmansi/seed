@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+//import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { Http } from '@angular/http';
 import { ENV } from '../../app/app.constant';
-import { AbsorptionsConst } from '../../app/app.constant';
-import { AbsorptionsItem } from './models/absorptions.model';
+//import { AbsorptionsConst } from '../../app/app.constant';
+//import { AbsorptionsItem } from './models/absorptions.model';
 //import { uuid } from '../../services/uuid';
 import { Parse } from 'parse';
 

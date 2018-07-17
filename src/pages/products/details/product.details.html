@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Avaliação de Produtos </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+  <ion-item no-lines *ngFor="let information of informations;" >
+      <ion-icon name="md-calendar"></ion-icon> {{information.date | date:"dd/MM/yyyy" }} 
+      <h5 item-end> {{information.shift}} </h5>
+  </ion-item>
+
+    <ion-card *ngFor="let information of informations;">
+      <ion-item>
+        <h2> {{ information.product}}</h2>
+        <p item-end> {{ information.hour}}</p>
+      </ion-item>
+      <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let item of information.items;">
+                <span item-start> {{ item.title }}</span>
+                <ion-badge [color]="item.value > information.target ? 'danger' : 'success'" item-end>{{ item.value }}%</ion-badge>
+            </ion-item>
+            <ion-item>
+                <span item-start> Peso </span>
+                <span item-end> {{ information.weight }} </span>
+            </ion-item>
+            <ion-item>
+                <ion-note> {{ information.outhers }} </ion-note>
+            </ion-item>
+          </ion-list>
+      </ion-card-content>
+      <ion-row>
+        <ion-col center text-center>
+          Fabricação: {{ information.manufactured | date:"dd/MM/yyyy"}}
+        </ion-col>
+        <ion-col center text-center>
+          Validate: {{ information.validity | date:"dd/MM/yyyy"}}
+        </ion-col>
+      </ion-row>
+    </ion-card>
+</ion-content>

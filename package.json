@@ -1,8 +1,8 @@
 {
-  "name": "ionic-font-awesome",
+  "name": "app-collector",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "Flavio Mansi",
+  "homepage": "http://www.adoro.com.br/",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -29,26 +29,30 @@
     "@ionic-native/status-bar": "4.4.2",
     "@ionic/storage": "2.1.3",
     "angular-billboard": "^0.1.6",
-    "billboard.js": "^1.4.1",
-    "cordova-android": "7.0.0",
-    "cordova-browser": "5.0.3",
+    "billboard.js": "^1.5.1",
+    "cordova": "^8.0.0",
+    "cordova-android": "^7.1.1",
     "cordova-plugin-device": "^2.0.2",
-    "cordova-plugin-ionic-keyboard": "^2.0.5",
-    "cordova-plugin-ionic-webview": "^1.1.19",
+    "cordova-plugin-ionic-keyboard": "^2.1.2",
+    "cordova-plugin-ionic-webview": "^1.2.1",
     "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
     "font-awesome": "^4.7.0",
+    "ionic": "^3.20.0",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
-    "moment": "^2.22.1",
+    "jshint": "^2.9.5",
+    "moment": "^2.22.2",
     "parse": "^1.11.1",
-    "rxjs": "5.5.2",
+    "rxjs": "^5.5.2",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.18"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "^3.1.7-201801172029",
-    "typescript": "2.4.2"
+    "@ionic/app-scripts": "^3.1.11",
+    "typescript": "2.4.2",
+    "ws": "5.2.2"
   },
   "description": "An Ionic project",
   "cordova": {
@@ -57,11 +61,11 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-statusbar": {}
     },
     "platforms": [
-      "android",
-      "browser"
+      "android"
     ]
   }
 }

@@ -1,0 +1,53 @@
+.item {
+  min-height: 3rem;
+  /* <- this can be whatever you need */
+}
+ion-note {
+  font-size: 12px;
+  align-self: flex-start;
+  margin-top: 14px;
+}
+
+ion-col div {
+  background-color: #f0f5ff;
+  border: 1px solid #e6e9ee;
+  border-radius: 3px;
+  padding: 3px;
+  text-align: center;
+}
+
+.accordion-list {
+  background: color($colors, light);
+  height: 100%;
+  margin-top: 50px;
+}
+
+.section {
+  background: #fff;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.section-active {
+  background: #ffc400; //color: #fff;
+}
+
+.child {
+  background: #e8e7e6;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.child-item {
+  background: #f3f2f1;
+  padding: 10px;
+}
+
+.label {
+  margin: 0px;
+}
+
+.list {
+  margin-bottom: 0px;
+}
+

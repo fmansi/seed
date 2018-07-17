@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Avaliação de Produtos</ion-title>
+
+    <ion-buttons end>
+      <button ion-button (click)="addProducts()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list id="products-list" *ngIf="products?.length">
+    <ion-list-header>
+      Coletas
+      <!--<button item-end ion-button icon-only clear (click)="showChart()">
+        <ion-icon [color]="showchart? 'primary':'gray'" name="podium"></ion-icon>
+      </button> -->
+    </ion-list-header>
+    <angular-billboard [chart]="chart" *ngIf="showchart"></angular-billboard>
+    <ion-item-sliding *ngFor="let product of products">
+      <ion-item text-wrap>
+        <button ion-item (click)="itemSelected(product)">
+          <ion-icon name="md-calendar"></ion-icon> {{product.date | date:"dd/MM/yyyy" }} - {{product.product}}
+          <span item-end> {{product.shift }} </span>
+          <p>{{product.createdAt | date:"HH:MM:ss"}} - {{product.analyst}}</p>
+        </button>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button primary (click)="editProduct(product)">
+          <ion-icon name="create"></ion-icon>
+        </button>
+        <button ion-button color="danger" (click)="deleteProduct(product)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <no-items (create)="addProducts()" *ngIf="!products?.length"></no-items>
+  <ion-fab right bottom>
+    <button ion-fab mini (click)="addProducts()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

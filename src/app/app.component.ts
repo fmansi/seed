@@ -9,6 +9,8 @@ import { HomePage } from '../pages/home/home.page';
 import { AuthProvider } from '../providers/auth/auth';
 import { SettingsPage } from '../pages/settings/settings';
 import { AbsorptionsListPage } from '../pages/absorptions/list/absorptions.list.page';
+import { ProductsListPage } from '../pages/products/list/products.list.page';
+import { MonitoringPage } from "../pages/monitoring/monitoring";
 
 @Component({
   templateUrl: 'app.html'
@@ -44,7 +46,8 @@ export class MyApp {
 
     this.qualityPages = [
       { title: 'Absorção (Chiller)', component: AbsorptionsListPage, icon: 'thermometer' },
-      //{ title: 'Absorção', component: TabsPage, icon: 'time' },
+      { title: 'Avaliação de Produto', component: ProductsListPage, icon: 'cube' },
+      { title: 'Monitoramento Temperatura', component: MonitoringPage, icon: 'eye' }
     ];
   }
 

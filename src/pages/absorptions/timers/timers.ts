@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, Events, DateTime } from 'ionic-angular';
-import { AbsorptionsConst } from '../../../app/app.constant';
+import { NavController, Events} from 'ionic-angular';
+//import { AbsorptionsConst } from '../../../app/app.constant';
 import * as moment from 'moment';
 
 @Component({

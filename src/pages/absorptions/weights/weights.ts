@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, ViewController, Events, ToastController   } from 'ionic-angular';
-import { AbsorptionsListPage } from '../list/absorptions.list.page';
+//import { AbsorptionsListPage } from '../list/absorptions.list.page';
 import { AbsorptionsService } from '../absorptions.service';
 import { AuthProvider } from '../../../providers/auth/auth';
 import { AbsorptionsConst } from '../../../app/app.constant';

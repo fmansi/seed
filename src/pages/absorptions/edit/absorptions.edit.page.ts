@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ViewController, NavParams } from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+//import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AbsorptionsItem } from '../models/absorptions.model';
  
 
@@ -13,8 +13,8 @@ export class AbsorptionsEditPage {
 
 	@ViewChild('absorptionSlider') absorptionSlider: any;
 
-	slideOneForm: FormGroup;
-	slideTwoForm: FormGroup;
+	//slideOneForm: FormGroup;
+	//slideTwoForm: FormGroup;
 
 	tempPreChiller = null;
 	tempChiller = null;
@@ -47,7 +47,7 @@ export class AbsorptionsEditPage {
 	showtimeChiller = false;
 	submitAttempt: boolean = false;
 
-	constructor(viewCtrl: ViewController, params: NavParams,  public formBuilder: FormBuilder) {
+	constructor(viewCtrl: ViewController, params: NavParams) {
 		this.viewCtrl = viewCtrl;
 		this.item = params.data.id ? params.data : new AbsorptionsItem();
 

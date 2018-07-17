@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController, ModalController,NavParams } from 'ionic-angular';
+import { ViewController, NavParams } from 'ionic-angular';
 // Providers
 import { AuthProvider } from '../../../providers/auth/auth';
 
@@ -20,8 +20,7 @@ export class AbsorptionDetailsPage {
   constructor(
               private auth: AuthProvider,
               public view: ViewController,
-              private navParams: NavParams,
-              private modal: ModalController) {
+              private navParams: NavParams) {
               //console.log( this.navParams.data);
   }
 

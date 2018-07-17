@@ -1,0 +1,54 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>Adicionar</ion-title>
+		<ion-buttons end>
+			<button ion-button (click)="close()">Fechar</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+<ion-content class="outer-content">
+<ion-item>
+	<ion-label>{{products.title}}</ion-label>
+	<ion-select [(ngModel)]="product" (ionChange)="onChange(product)">
+		<ion-option *ngFor="let product of products.options" value ="{{product.key}}" >{{product.label}}</ion-option>
+	</ion-select>
+</ion-item>
+<div *ngIf="showThis">
+	<ion-list *ngFor="let item of items;">
+		<ion-item *ngFor="let collect of item.fields; let i = index">
+			<ion-label>{{collect.title}}</ion-label>
+			<ion-input type="number" value="0" placeholder="{{collect.display}}" (input)="valChange($event.target.value, i)" [(ngModel)]="collect.value"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label>Peso</ion-label>
+			<ion-input type="number" value="0" placeholder="Registrar o peso" [(ngModel)]="collect.weight"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label>Fabricação</ion-label>
+			<ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="collect.manufactured"></ion-datetime>
+		</ion-item>
+		<ion-item>
+			<ion-label>Validade</ion-label>
+			<ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="collect.validity"></ion-datetime>
+		</ion-item>
+		<ion-item>
+			<ion-label>Outros</ion-label>
+			<ion-textarea rows="3" [(ngModel)]="collect.outhers"></ion-textarea>
+		</ion-item>
+	</ion-list>
+	<ion-row padding>
+		<button ion-button full (tap)="save(collect)">Salvar</button>
+	</ion-row>
+</div>
+</ion-content>
+
+<style>
+  ion-list:first-child {
+    margin-top: 32px;
+  }
+
+  ion-list+ion-list {
+    margin-top: 0;
+  }
+</style>
+

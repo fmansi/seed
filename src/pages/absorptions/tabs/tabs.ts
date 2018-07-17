@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ViewController, Events, ToastController } from 'ionic-angular';
+import { NavController, ViewController, Events, ToastController } from 'ionic-angular';
 import { TimersPage } from '../timers/timers';
 import { TemperaturesPage } from '../temperatures/temperatures';
 import { WeightsPage } from '../weights/weights';

@@ -13,7 +13,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class SettingsPage {
   private parseServerUrl: string;
   private parseServerDB: string;
-  private key = 'settings-key';
+ // private key = 'settings-key';
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,

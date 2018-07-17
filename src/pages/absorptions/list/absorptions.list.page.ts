@@ -3,8 +3,8 @@ import { ModalController, NavController, AlertController } from 'ionic-angular';
 import { AngularBillboardService } from 'angular-billboard';
 
 import { AbsorptionsService } from '../absorptions.service';
-import { AbsorptionsItem } from '../models/absorptions.model';
-import { AbsorptionsEditPage } from '../edit/absorptions.edit.page';
+//import { AbsorptionsItem } from '../models/absorptions.model';
+//import { AbsorptionsEditPage } from '../edit/absorptions.edit.page';
 import { AbsorptionDetailsPage } from '../details/absorption.details';
 // Providers
 import { AuthProvider } from '../../../providers/auth/auth';
